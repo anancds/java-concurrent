@@ -2,6 +2,9 @@ package com.cds.learn.chapter2.defensiveCopy;
 
 import java.util.Date;
 
+/**
+ * reference: http://www.javapractices.com/topic/TopicAction.do?Id=15
+ */
 public final class Planet {
     public Planet (double aMass, String aName, Date aDateOfDiscovery) {
         fMass = aMass;
