@@ -7,8 +7,8 @@ public class SynchronizedTest1 {
 
     Object object = new Object();
 
-    public void test1() {
-        synchronized (this) {
+    public static void test1() {
+        synchronized (SynchronizedTest1.class) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -18,8 +18,8 @@ public class SynchronizedTest1 {
         }
     }
 
-    public void test2() {
-        synchronized (this) {
+    public static void test2() {
+        synchronized (SynchronizedTest1.class) {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {

@@ -11,6 +11,7 @@ public class SynchronizedMain {
 
 //        SynchronizedTest test = new SynchronizedTest();
         SynchronizedTest1 test = new SynchronizedTest1();
+        SynchronizedTest1 test1 = new SynchronizedTest1();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -35,7 +36,7 @@ public class SynchronizedMain {
 //                    }
 //                    test.test3();
 //                }
-                test.test2();
+                test1.test1();
             }
         }).start();
 
