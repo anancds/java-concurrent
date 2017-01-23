@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * <p></p>
+ * <p>Vehicle tracker 测试类</p>
  *
  * @author chendongsheng5 2017/1/18 11:16
  * @version V1.0
@@ -29,7 +29,8 @@ public class TestVehicleTracker {
 		System.out.println(monitorVehicleTracker.getLocation("#1"));
 
 		new Thread(new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				for (int i = 0; i < 20; i++) {
 					monitorVehicleTracker.setLocation("#1", i, i + 1);
 					try {
@@ -42,13 +43,15 @@ public class TestVehicleTracker {
 		}).start();
 
 		new Thread(new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				System.out.println(monitorVehicleTracker.getLocations());
 			}
 		}).start();
 
 		new Thread(new Runnable() {
-			@Override public void run() {
+			@Override
+			public void run() {
 				MutablePoint point1 = monitorVehicleTracker.getLocation("#1");
 				while (true) {
 
@@ -63,10 +66,66 @@ public class TestVehicleTracker {
 		}).start();
 	}
 
+	private static void testDelegatingVehicleTracker() {
+		Point point = new Point(3, 4);
+		Map<String, Point> map = new HashMap<>();
+		map.put("#1", point);
+
+		DelegatingVehicleTracker delegatingVehicleTracker = new DelegatingVehicleTracker(map);
+		System.out.println(delegatingVehicleTracker.getLocations());
+		System.out.println(delegatingVehicleTracker.getLocation("#1"));
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < 20; i++) {
+					delegatingVehicleTracker.setLocation("#1", i, i + 1);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Point point1 = delegatingVehicleTracker.getLocation("#1");
+
+				for (int i = 0; i < 20; i++) {
+					System.out.println(point1.x + ", " + point1.y);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Map<String, Point> map1 = delegatingVehicleTracker.getLocations();
+				for (int i = 0; i < 20; i++) {
+					System.out.println(map1);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+	}
+
 	public static void main(String[] args) {
 
-		testMonitorVehicleTracker();
+		//		testMonitorVehicleTracker();
 
+		testDelegatingVehicleTracker();
 	}
 }
 
@@ -83,7 +142,8 @@ class MutablePoint {
 		this.y = p.y;
 	}
 
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return "MutablePoint{" + "x=" + x + ", y=" + y + '}';
 	}
 }
@@ -136,6 +196,11 @@ class Point {
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	@Override
+	public String toString() {
+		return "Point{" + "x=" + x + ", y=" + y + '}';
 	}
 }
 
