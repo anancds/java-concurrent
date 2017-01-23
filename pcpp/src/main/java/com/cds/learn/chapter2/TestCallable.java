@@ -20,7 +20,11 @@ import java.io.IOException;
  * @modify by reason:{方法名}:{原因}
  */
 
-
+/**
+ * reference: http://stackoverflow.com/questions/28915215/iterator-type-in-java-weakly-consistent
+ * http://stackoverflow.com/questions/8025104/concurrentnavigablemap-interpretation-of-weakly-consistent-iterators
+ * http://stackoverflow.com/questions/20142493/fail-safe-iterators-and-weakly-consistent-iterators
+ */
 public class TestCallable {
 	public static void main(String[] args)
 			throws InterruptedException, IOException
@@ -121,7 +125,7 @@ public class TestCallable {
 		else if (t instanceof Error)
 			throw (Error) t;
 		else
-			throw new IllegalStateException("Not unchecked", t);
+			throw new IllegalStateException("Not unchecked Exception", t);
 	}
 
 	// Read at most maxLines via HTTP connection to url
