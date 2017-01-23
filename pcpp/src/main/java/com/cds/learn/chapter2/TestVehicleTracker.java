@@ -28,9 +28,39 @@ public class TestVehicleTracker {
 		System.out.println(monitorVehicleTracker.getLocations());
 		System.out.println(monitorVehicleTracker.getLocation("#1"));
 
-		monitorVehicleTracker.setLocation("#1", 4, 5);
-		System.out.println(monitorVehicleTracker.getLocations());
-		System.out.println(monitorVehicleTracker.getLocation("#1"));
+		new Thread(new Runnable() {
+			@Override public void run() {
+				for (int i = 0; i < 20; i++) {
+					monitorVehicleTracker.setLocation("#1", i, i + 1);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override public void run() {
+				System.out.println(monitorVehicleTracker.getLocations());
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override public void run() {
+				MutablePoint point1 = monitorVehicleTracker.getLocation("#1");
+				while (true) {
+
+					System.out.println(point1.x + ", " + point1.y);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	public static void main(String[] args) {
@@ -84,6 +114,7 @@ class MonitorVehicleTracker {
 
 	public synchronized MutablePoint getLocation(String id) {
 		MutablePoint loc = locations.get(id);
+		//				return loc == null ? null : loc;
 		return loc == null ? null : new MutablePoint(loc);
 	}
 
