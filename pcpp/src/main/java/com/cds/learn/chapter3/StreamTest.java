@@ -99,6 +99,10 @@ public class StreamTest {
 		IntStream nats3 = IntStream.generate(() -> next[0]++);
 	}
 
+	private static void createStream4() {
+
+	}
+
 	public static void main(String[] args) {
 		//		streamOperation();
 		//		parallelTest();
