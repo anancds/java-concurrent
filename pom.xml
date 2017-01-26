@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>pcpp</module>
+        <module>functional-programming</module>
     </modules>
 
     <dependencyManagement>

@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 class Example154 {
     public static void main(String[] args) {
+        System.out.println();
         FunList<Integer> empty = new FunList<>(null),
                 list1 = cons(9, cons(13, cons(0, empty))),                  // 9 13 0
                 list2 = cons(7, list1),                                     // 7 9 13 0
