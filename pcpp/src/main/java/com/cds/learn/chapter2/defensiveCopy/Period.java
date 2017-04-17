@@ -1,6 +1,5 @@
 package com.cds.learn.chapter2.defensiveCopy;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +21,6 @@ public final class Period {
 	}
 
 	public static void main(String[] args) {
-		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
 		Calendar calendar = Calendar.getInstance();
 
