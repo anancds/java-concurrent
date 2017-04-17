@@ -12,6 +12,7 @@ public class SeeminglyUnmodifiable {
 	private Map<String, Point1> startingLocations = new HashMap<>(3);
 
 	public SeeminglyUnmodifiable() {
+		//创建对象就是创建一个地址，这个地址不可改变，原理跟final差不多。
 		startingLocations.put("LeftRook", new Point1(1, 1));
 		startingLocations.put("LeftKnight", new Point1(1, 2));
 		startingLocations.put("LeftCamel", new Point1(1, 3));
