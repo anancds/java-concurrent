@@ -10,8 +10,8 @@ public class Test implements Runnable {
 	public static void main(String[] args) {
 		Test ss = new Test();
 		new Thread(ss).start();
-		new Thread(ss).start();
-		new Thread(ss).start();
+//		new Thread(ss).start();
+//		new Thread(ss).start();
 		//        Test ss = new Test();
 		//        Test ss1 = new Test();
 		//        Test ss2 = new Test();

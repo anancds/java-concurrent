@@ -17,12 +17,7 @@ public class VolatileTest {
     }
 
     public static void main(String[] args) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                inc();
-            }
-        }).start();
+        new Thread(VolatileTest::inc).start();
 
         VolatileTest.inc();
         System.out.println("the count is: " + count);

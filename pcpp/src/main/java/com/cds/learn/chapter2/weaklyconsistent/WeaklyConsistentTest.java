@@ -7,11 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * <p>弱一致性测试类</p>
  *
- * @author chendongsheng5 2017/1/23 14:17
- * @version V1.0
- * @modificationHistory =========================逻辑或功能性重大变更记录
- * @modify by user: chendongsheng5 2017/1/23 14:17
- * @modify by reason:{方法名}:{原因}
  */
 public class WeaklyConsistentTest {
 

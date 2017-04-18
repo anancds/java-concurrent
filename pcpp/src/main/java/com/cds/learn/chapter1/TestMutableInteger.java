@@ -2,6 +2,9 @@ package com.cds.learn.chapter1;
 
 import java.io.IOException;
 
+/**
+ * 这个例子用来说明volatile的可见性
+ */
 public class TestMutableInteger {
     public static void main(String[] args) throws IOException {
         final MutableInteger mi = new MutableInteger();

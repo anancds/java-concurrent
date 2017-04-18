@@ -10,15 +10,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-/**
- * <p></p>
- *
- * @author chendongsheng5 2017/1/18 14:51
- * @version V1.0
- * @modificationHistory =========================逻辑或功能性重大变更记录
- * @modify by user: chendongsheng5 2017/1/18 14:51
- * @modify by reason:{方法名}:{原因}
- */
 
 /**
  * reference: http://stackoverflow.com/questions/28915215/iterator-type-in-java-weakly-consistent
