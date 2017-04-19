@@ -8,101 +8,100 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * <p>Vehicle tracker 测试类</p>
- *
  */
 @SuppressWarnings("unused")
 public class TestVehicleTracker {
 
-	private static void testMonitorVehicleTracker() {
-		MutablePoint point = new MutablePoint();
-		point.x = 3;
-		point.y = 4;
-		Map<String, MutablePoint> map = new HashMap<>();
-		map.put("#1", point);
+  private static void testMonitorVehicleTracker() {
+    MutablePoint point = new MutablePoint();
+    point.x = 3;
+    point.y = 4;
+    Map<String, MutablePoint> map = new HashMap<>();
+    map.put("#1", point);
 
-		MonitorVehicleTracker monitorVehicleTracker = new MonitorVehicleTracker(map);
-		System.out.println(monitorVehicleTracker.getLocations());
-		System.out.println(monitorVehicleTracker.getLocation("#1"));
+    MonitorVehicleTracker monitorVehicleTracker = new MonitorVehicleTracker(map);
+    System.out.println(monitorVehicleTracker.getLocations());
+    System.out.println(monitorVehicleTracker.getLocation("#1"));
 
-		new Thread(() -> {
-			for (int i = 0; i < 20; i++) {
-				monitorVehicleTracker.setLocation("#1", i, i + 1);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+    new Thread(() -> {
+      for (int i = 0; i < 20; i++) {
+        monitorVehicleTracker.setLocation("#1", i, i + 1);
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
 
-		new Thread(() -> System.out.println(monitorVehicleTracker.getLocations())).start();
+    new Thread(() -> System.out.println(monitorVehicleTracker.getLocations())).start();
 
-		new Thread(() -> {
-			MutablePoint point1 = monitorVehicleTracker.getLocation("#1");
-			while (true) {
+    new Thread(() -> {
+      MutablePoint point1 = monitorVehicleTracker.getLocation("#1");
+      while (true) {
 
-				System.out.println(point1.x + ", " + point1.y);
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
-	}
+        System.out.println(point1.x + ", " + point1.y);
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
+  }
 
-	private static void testDelegatingVehicleTracker() {
-		Point point = new Point(3, 4);
-		Map<String, Point> map = new HashMap<>();
-		map.put("#1", point);
+  private static void testDelegatingVehicleTracker() {
+    Point point = new Point(3, 4);
+    Map<String, Point> map = new HashMap<>();
+    map.put("#1", point);
 
-		DelegatingVehicleTracker delegatingVehicleTracker = new DelegatingVehicleTracker(map);
-		System.out.println(delegatingVehicleTracker.getLocations());
-		System.out.println(delegatingVehicleTracker.getLocation("#1"));
+    DelegatingVehicleTracker delegatingVehicleTracker = new DelegatingVehicleTracker(map);
+    System.out.println(delegatingVehicleTracker.getLocations());
+    System.out.println(delegatingVehicleTracker.getLocation("#1"));
 
-		new Thread(() -> {
-			for (int i = 0; i < 20; i++) {
-				delegatingVehicleTracker.setLocation("#1", i, i + 1);
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+    new Thread(() -> {
+      for (int i = 0; i < 20; i++) {
+        delegatingVehicleTracker.setLocation("#1", i, i + 1);
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
 
-		new Thread(() -> {
-			Point point1 = delegatingVehicleTracker.getLocation("#1");
+    new Thread(() -> {
+      Point point1 = delegatingVehicleTracker.getLocation("#1");
 
-			for (int i = 0; i < 20; i++) {
-				System.out.println(point1.x + ", " + point1.y);
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
+      for (int i = 0; i < 20; i++) {
+        System.out.println(point1.x + ", " + point1.y);
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
 
-		new Thread(() -> {
-			Map<String, Point> map1 = delegatingVehicleTracker.getLocations();
-			for (int i = 0; i < 20; i++) {
-				System.out.println(map1);
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}).start();
-	}
+    new Thread(() -> {
+      Map<String, Point> map1 = delegatingVehicleTracker.getLocations();
+      for (int i = 0; i < 20; i++) {
+        System.out.println(map1);
+        try {
+          Thread.sleep(500);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }).start();
+  }
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		//		testMonitorVehicleTracker();
+    //		testMonitorVehicleTracker();
 
-		//		testDelegatingVehicleTracker();
-	}
+    //		testDelegatingVehicleTracker();
+  }
 }
 
 /**
@@ -128,22 +127,23 @@ public class TestVehicleTracker {
  * 3、类似p.x=p.x+1这样的依赖于当前值的修改操作不是原子的，会导致丢失修改，所以即使在属性x,y之前加上volatile关键字也不是线程安全的
  */
 class MutablePoint {
-	public int x, y;
 
-	public MutablePoint() {
-		x = 0;
-		y = 0;
-	}
+  public int x, y;
 
-	public MutablePoint(MutablePoint p) {
-		this.x = p.x;
-		this.y = p.y;
-	}
+  public MutablePoint() {
+    x = 0;
+    y = 0;
+  }
 
-	@Override
-	public String toString() {
-		return "MutablePoint{" + "x=" + x + ", y=" + y + '}';
-	}
+  public MutablePoint(MutablePoint p) {
+    this.x = p.x;
+    this.y = p.y;
+  }
+
+  @Override
+  public String toString() {
+    return "MutablePoint{" + "x=" + x + ", y=" + y + '}';
+  }
 }
 
 /**
@@ -160,34 +160,36 @@ class MutablePoint {
  */
 @SuppressWarnings("unused")
 class MonitorVehicleTracker {
-	private final Map<String, MutablePoint> locations;
 
-	public MonitorVehicleTracker(Map<String, MutablePoint> locations) {
-		this.locations = deepCopy(locations);
-	}
+  private final Map<String, MutablePoint> locations;
 
-	private static Map<String, MutablePoint> deepCopy(Map<String, MutablePoint> m) {
-		Map<String, MutablePoint> result = new HashMap<String, MutablePoint>();
-		for (String id : m.keySet())
-			result.put(id, new MutablePoint(m.get(id)));
-		return Collections.unmodifiableMap(result);
-	}
+  public MonitorVehicleTracker(Map<String, MutablePoint> locations) {
+    this.locations = deepCopy(locations);
+  }
 
-	public synchronized Map<String, MutablePoint> getLocations() {
-		return deepCopy(locations);
-	}
+  private static Map<String, MutablePoint> deepCopy(Map<String, MutablePoint> m) {
+    Map<String, MutablePoint> result = new HashMap<String, MutablePoint>();
+    for (String id : m.keySet()) {
+      result.put(id, new MutablePoint(m.get(id)));
+    }
+    return Collections.unmodifiableMap(result);
+  }
 
-	public synchronized MutablePoint getLocation(String id) {
-		MutablePoint loc = locations.get(id);
-		//				return loc == null ? null : loc;
-		return loc == null ? null : new MutablePoint(loc);
-	}
+  public synchronized Map<String, MutablePoint> getLocations() {
+    return deepCopy(locations);
+  }
 
-	public synchronized void setLocation(String id, int x, int y) {
-		MutablePoint loc = locations.get(id);
-		loc.x = x;
-		loc.y = y;
-	}
+  public synchronized MutablePoint getLocation(String id) {
+    MutablePoint loc = locations.get(id);
+    //				return loc == null ? null : loc;
+    return loc == null ? null : new MutablePoint(loc);
+  }
+
+  public synchronized void setLocation(String id, int x, int y) {
+    MutablePoint loc = locations.get(id);
+    loc.x = x;
+    loc.y = y;
+  }
 }
 
 /**
@@ -196,17 +198,18 @@ class MonitorVehicleTracker {
  * @author Brian Goetz and Tim Peierls
  */
 class Point {
-	public final int x, y;
 
-	public Point(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
+  public final int x, y;
 
-	@Override
-	public String toString() {
-		return "Point{" + "x=" + x + ", y=" + y + '}';
-	}
+  public Point(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  @Override
+  public String toString() {
+    return "Point{" + "x=" + x + ", y=" + y + '}';
+  }
 }
 
 /**
@@ -226,32 +229,34 @@ class Point {
  */
 @SuppressWarnings("unused")
 class DelegatingVehicleTracker {
-	private final ConcurrentMap<String, Point> locations;
-	private final Map<String, Point> unmodifiableMap;
 
-	public DelegatingVehicleTracker(Map<String, Point> points) {
-		locations = new ConcurrentHashMap<>(points);
-		unmodifiableMap = Collections.unmodifiableMap(locations);
-	}
+  private final ConcurrentMap<String, Point> locations;
+  private final Map<String, Point> unmodifiableMap;
 
-	public Point getLocation(String id) {
-		return locations.get(id);
-	}
+  public DelegatingVehicleTracker(Map<String, Point> points) {
+    locations = new ConcurrentHashMap<>(points);
+    unmodifiableMap = Collections.unmodifiableMap(locations);
+  }
 
-	public void setLocation(String id, int x, int y) {
-		if (locations.replace(id, new Point(x, y)) == null)
-			throw new IllegalArgumentException("invalid vehicle name: " + id);
-	}
+  public Point getLocation(String id) {
+    return locations.get(id);
+  }
 
-	// First version of getLocations (Listing 4.7) (version V2A)
-	public Map<String, Point> getLocations() {
-		return unmodifiableMap;
-	}
+  public void setLocation(String id, int x, int y) {
+    if (locations.replace(id, new Point(x, y)) == null) {
+      throw new IllegalArgumentException("invalid vehicle name: " + id);
+    }
+  }
 
-	// Second version of getLocations (Listing 4.8) (version V2B)
-	public Map<String, Point> getLocationsSnapshot() {
-		return Collections.unmodifiableMap(new HashMap<>(locations));
-	}
+  // First version of getLocations (Listing 4.7) (version V2A)
+  public Map<String, Point> getLocations() {
+    return unmodifiableMap;
+  }
+
+  // Second version of getLocations (Listing 4.8) (version V2B)
+  public Map<String, Point> getLocationsSnapshot() {
+    return Collections.unmodifiableMap(new HashMap<>(locations));
+  }
 }
 
 /**
@@ -259,28 +264,29 @@ class DelegatingVehicleTracker {
  */
 @SuppressWarnings("unused")
 class SafePoint {
-	private int x, y;
 
-	private SafePoint(int[] a) {
-		this(a[0], a[1]);
-	}
+  private int x, y;
 
-	public SafePoint(SafePoint p) {
-		this(p.get());
-	}
+  private SafePoint(int[] a) {
+    this(a[0], a[1]);
+  }
 
-	public SafePoint(int x, int y) {
-		this.set(x, y);
-	}
+  public SafePoint(SafePoint p) {
+    this(p.get());
+  }
 
-	public synchronized int[] get() {
-		return new int[] { x, y };
-	}
+  public SafePoint(int x, int y) {
+    this.set(x, y);
+  }
 
-	public synchronized void set(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
+  public synchronized int[] get() {
+    return new int[]{x, y};
+  }
+
+  public synchronized void set(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
 }
 
 /**
@@ -288,25 +294,35 @@ class SafePoint {
  *
  * @author Brian Goetz and Tim Peierls
  */
+
+/**
+ * 将线程安全委托给ConcurrentHashMap
+ * 有点如下：
+ * 1、实时性高。
+ * 2、getLocations返回一个不可修改的Map，线程安全。
+ * 缺点如下：
+ * 调用者不能增加或者删除车辆，只能修改车辆位置信息，也就是通过set方法修改萨芬point的值。
+ */
 @SuppressWarnings("unused")
 class PublishingVehicleTracker {
-	private final Map<String, SafePoint> locations;
-	private final Map<String, SafePoint> unmodifiableMap;
 
-	public PublishingVehicleTracker(Map<String, SafePoint> locations) {
-		this.locations = new ConcurrentHashMap<>(locations);
-		this.unmodifiableMap = Collections.unmodifiableMap(this.locations);
-	}
+  private final Map<String, SafePoint> locations;
+  private final Map<String, SafePoint> unmodifiableMap;
 
-	public Map<String, SafePoint> getLocations() {
-		return unmodifiableMap;
-	}
+  public PublishingVehicleTracker(Map<String, SafePoint> locations) {
+    this.locations = new ConcurrentHashMap<>(locations);
+    this.unmodifiableMap = Collections.unmodifiableMap(this.locations);
+  }
 
-	public SafePoint getLocation(String id) {
-		return locations.get(id);
-	}
+  public Map<String, SafePoint> getLocations() {
+    return unmodifiableMap;
+  }
 
-	public void setLocation(String id, int x, int y) {
-		locations.get(id).set(x, y);
-	}
+  public SafePoint getLocation(String id) {
+    return locations.get(id);
+  }
+
+  public void setLocation(String id, int x, int y) {
+    locations.get(id).set(x, y);
+  }
 }
