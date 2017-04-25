@@ -89,7 +89,7 @@ public class WeaklyConsistentTest {
 
 	public static void main(String[] args) {
 //				dequeTest();
-				linkedListTest();
-//		copyOnWriteTest();
+//				linkedListTest();
+		copyOnWriteTest();
 	}
 }
