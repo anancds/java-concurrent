@@ -284,6 +284,7 @@ class NewLongAdderPadded {
     for (int stripe=0; stripe<NSTRIPES; stripe++) {
       // Believe it or not, this sometimes speeds up the code,
       // presumably because it avoids false sharing of cache lines:
+      //每个Object占用8个字节
       new Object(); new Object(); new Object(); new Object(); new Object(); new Object(); new Object();
       counters[stripe] = new AtomicLong();
     }
