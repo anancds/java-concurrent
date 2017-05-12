@@ -21,7 +21,7 @@ public class HelloClassLoader {
 //        }
 
 //        loadExtLibClass();
-//        loadClass();
+        loadClass();
     // mock String class
 //        mockStringClass();
 
@@ -31,28 +31,7 @@ public class HelloClassLoader {
 //        loadClassByDifferentLoader();
 
     // load Network class. load http://localhost/java/classloader/NetworkClass.class, it's under /Library/WebServer/Documents directory
-    loadNetworkClass();
-  }
-
-  private static void loadNetworkClass() throws ClassNotFoundException {
-    String className = "classloader.NetworkClass";
-    NetworkClassLoader networkClassLoader = new NetworkClassLoader();
-    Class<?> clazz  = networkClassLoader.loadClass(className);
-
-    Method printMethod = null;
-    try {
-      printMethod = clazz.getDeclaredMethod("print", null);
-      printMethod.invoke(clazz.newInstance());
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
-      e.printStackTrace();
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (InvocationTargetException e) {
-      e.printStackTrace();
-    }
-
+//    loadNetworkClass();
   }
 
   private static void loadFileSystemClass() throws ClassNotFoundException {
@@ -116,28 +95,28 @@ public class HelloClassLoader {
 
   private static void loadClass() throws ClassNotFoundException {
     ClassLoader appClassLoader = ClassLoader.getSystemClassLoader();
-    Class<?> clazz1 = appClassLoader.loadClass("classloader.MusicPlayer");
-    System.out.println(clazz1.getClassLoader());
+    Class<?> clazz1 = appClassLoader.loadClass("com.cds.learn.classloader.MusicPlayer");
+    System.out.println(clazz1.getClassLoader().getClass().getSimpleName());
 
-    Class<?> clazz2 = Class.forName("classloader.MusicPlayer2");
+    Class<?> clazz2 = Class.forName("com.cds.learn.classloader.MusicPlayer2");
     ClassLoader classLoader = clazz2.getClassLoader();
     System.out.println(classLoader);
 
-    Class<?> clazz3 = Class.forName("java.lang.String");
-    System.out.println(clazz3.getClassLoader());
-
-    Class<?> clazz4 = new NetworkClassLoader().loadClass("java.lang.String");
-    System.out.println(clazz4.getClassLoader());
+//    Class<?> clazz3 = Class.forName("java.lang.String");
+//    System.out.println(clazz3.getClassLoader());
+//
+//    Class<?> clazz4 = new NetworkClassLoader().loadClass("java.lang.String");
+//    System.out.println(clazz4.getClassLoader());
   }
 
   private static void loadExtLibClass() {
-    // mv MusicPlayer.jar into jre/lib/ext/
-    ClassLoader classLoader = new NetworkClassLoader();
+    // mv MusicPlayer1.jar into jre/lib/ext/
+    ClassLoader classLoader = new FileSystemClassLoader();
     classLoader = classLoader.getParent().getParent(); // ExtClassLoader
     System.out.println(classLoader);
     try {
-      classLoader.loadClass("classloader.MusicPlayer"); // this is in jre/lib/ext/
-      classLoader.loadClass("classloader.MusicPlayer2");
+      classLoader.loadClass("com.cds.learn.classloader.MusicPlayer"); // this is in jre/lib/ext/
+      classLoader.loadClass("com.cds.learn.classloader.MusicPlayer2");
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
