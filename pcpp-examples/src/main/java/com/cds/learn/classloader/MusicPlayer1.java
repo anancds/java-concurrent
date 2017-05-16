@@ -7,7 +7,8 @@ package com.cds.learn.classloader;
  * 演示流程：
  * 1、先运行在main函数
  * 2、然后打包，放到C:\Program Files\Java\jre1.8.0_101\lib\ext目录下
- * 3、把MusicPlayer类修改成MusicPlayer1。
+ * 3、把MusicPlayer类修改成MusicPlayer1。然后用AppClassLoader去加载，其实是用双亲去加载的，就是双亲委托。
+ * 4、看下ClassLoader的LoadClass源码。
  *
  */
 public class MusicPlayer1 {
