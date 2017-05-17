@@ -14,6 +14,8 @@ import java.util.Set;
  * 虚引用形同虚设，它所引用的对象随时可能被垃圾回收器回收，具有弱引用的对象拥有稍微长一点的生命周期，
  * 当垃圾回收器执行回收操作时，有可能被垃圾回收器回收，具有软引用的对象拥有更长的生命周期，
  * 但在Java虚拟机认为内存不足的情况下，也是会被垃圾回收器回收的
+ *
+ * reference：http://stackoverflow.com/questions/3329691/understanding-javas-reference-classes-softreference-weakreference-and-phanto
  */
 public class ReferenceTest {
 
