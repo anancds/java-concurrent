@@ -11,6 +11,8 @@ public class Main {
 
   /**
    * @param args the command line arguments
+   *
+   * 快速定位ClassLoader的jvm参数是：-XX:+TraceClassLoading -XX:+TraceClassUnloading
    */
   public static void main(String[] args)
     throws ClassNotFoundException, IOException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, InterruptedException {

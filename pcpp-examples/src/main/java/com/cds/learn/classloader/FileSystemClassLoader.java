@@ -18,7 +18,9 @@ public class FileSystemClassLoader extends ClassLoader {
   }
 
   private byte[] loadClassDataFromFile(String name) {
-    String localPath = "/Users/Jay" + File.separatorChar + "Desktop" + File.separatorChar + name.replace('.', File.separatorChar) + ".class";
+    String localPath =
+      "pcpp-example" + File.separator + "src" + File.separator + "main" + File.separator
+        + "resources" + File.separator + "LoadClass.class";
     System.out.printf("localPath: %s\n", localPath);
 
     try {
