@@ -12,4 +12,11 @@
     <artifactId>pcpp</artifactId>
 
 
+  <dependencies>
+    <dependency>
+      <groupId>org.multiverse</groupId>
+      <artifactId>multiverse-core</artifactId>
+      <version>0.7.0</version>
+    </dependency>
+  </dependencies>
 </project>
