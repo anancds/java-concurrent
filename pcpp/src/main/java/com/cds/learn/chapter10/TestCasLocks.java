@@ -370,7 +370,7 @@ public class TestCasLocks {
 class SimpleTryLock {
 
   // Refers to holding thread, null iff unheld
-  private final AtomicReference<Thread> holder = new AtomicReference<Thread>();
+  private final AtomicReference<Thread> holder = new AtomicReference<>();
 
   public boolean tryLock() {
     final Thread current = Thread.currentThread();
@@ -411,7 +411,7 @@ class SimpleTryLock {
 class ReentrantTryLock {
 
   // Refers to holding thread, null iff unheld
-  private final AtomicReference<Thread> holder = new AtomicReference<Thread>();
+  private final AtomicReference<Thread> holder = new AtomicReference<>();
   // Valid only if holder != null
   private volatile int holdCount = 0;
 
@@ -451,7 +451,7 @@ class ReentrantTryLock {
 class SimpleLock {
 
   // Refers to holding thread, null iff unheld
-  private final AtomicReference<Thread> holder = new AtomicReference<Thread>();
+  private final AtomicReference<Thread> holder = new AtomicReference<>();
   // The FIFO queue of threads waiting for this lock
   private final Queue<Thread> waiters = new ConcurrentLinkedQueue<>();
 
