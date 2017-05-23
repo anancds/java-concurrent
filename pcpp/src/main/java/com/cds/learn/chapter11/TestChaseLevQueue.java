@@ -16,12 +16,9 @@ interface Deque<T> {
 // ----------------------------------------------------------------------
 // SortTask class, Deque<T> interface, SimpleDeque<T>
 
-/**
- * Created by chendongsheng5 on 2017/5/19.
- */
 public class TestChaseLevQueue {
 
-  final static int size = 100_000_000; // Number of integers to sort
+  private final static int size = 100_000_000; // Number of integers to sort
 
   public static void main(String[] args) {
     multiQueueMultiThreadCL(8);
@@ -36,7 +33,7 @@ public class TestChaseLevQueue {
     ChaseLevDeque<SortTask>[] queues
       = (ChaseLevDeque<SortTask>[]) (new ChaseLevDeque[threadCount]);
     for (int t = 0; t < threadCount; t++) {
-      queues[t] = new ChaseLevDeque<SortTask>(100000);
+      queues[t] = new ChaseLevDeque<>(100000);
     }
     int[] arr = IntArrayUtil.randomIntArray(size);
     queues[0].push(new SortTask(arr, 0, arr.length - 1));

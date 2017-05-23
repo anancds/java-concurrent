@@ -14,16 +14,8 @@ public class TestVolatile {
       sbe1.threadB();
     }
     final StoreBufferExample sbe2 = new StoreBufferExample();
-    Thread tA = new Thread(new Runnable() {
-      public void run() {
-        sbe2.threadA();
-      }
-    }),
-      tB = new Thread(new Runnable() {
-        public void run() {
-          sbe2.threadB();
-        }
-      });
+    Thread tA = new Thread(sbe2::threadA),
+      tB = new Thread(() -> sbe2.threadB());
     tA.start();
     tB.start();
   }
@@ -31,19 +23,19 @@ public class TestVolatile {
 
 class StoreBufferExample {
 
-  volatile boolean A = false;
-  volatile boolean B = false;
-  boolean A_Won = false;
-  boolean B_Won = false;
+  private volatile boolean A = false;
+  private volatile boolean B = false;
+  private boolean A_Won = false;
+  private boolean B_Won = false;
 
-  public void threadA() {
+  void threadA() {
     A = true;
     if (!B) {
       A_Won = true;
     }
   }
 
-  public void threadB() {
+  void threadB() {
     B = true;
     if (!A) {
       B_Won = true;

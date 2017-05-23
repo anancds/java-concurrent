@@ -3,6 +3,7 @@ package com.cds.learn.lock;
 /**
  * Created by chendongsheng5 on 2017/4/26.
  * 这个例子用来说明ThreadLoacl的用法。
+ *
  * 有一个个人的理解，不一定对，锁就是时间换空间，因为java的并发模式就是共享可变的，ThreadLocal可以理解为
  * 空间换时间。
  *
@@ -11,7 +12,7 @@ package com.cds.learn.lock;
  * 根据官方文档可以总结出三点：
  * 1、每个线程都有自己的局部变量。
  * 2、每个线程都有独立于变量的初始化副本。
- * 3、
+ * 3、每个线程有自己的一个ThreadLocal，它是变量的一个“拷贝”，修改它不影响其他线程。
  */
 public class ThreadLocalTest {
 

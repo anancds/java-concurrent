@@ -7,6 +7,6 @@ public class LocalClass {
 
   public void getName() {
 
-    System.out.println("cds");
+    System.out.println("abc");
   }
 }

@@ -66,7 +66,7 @@ public class MyArraySpliterator implements Spliterator<Long> {
 
   @Override
   public Spliterator<Long> trySplit() {
-    if (estimateSize() <= 1000) {
+    if (estimateSize() <= 10) {
       return null;
     }
     int middle = (endPosition + currentPosition) >>> 1;
@@ -77,7 +77,7 @@ public class MyArraySpliterator implements Spliterator<Long> {
   }
 
   public static void main(String[] args) {
-    long[] twoThousandNumbers = LongStream.rangeClosed(1, 10_000).toArray();
+    long[] twoThousandNumbers = LongStream.rangeClosed(1, 100).toArray();
 
     Spliterator<Long> spliterator = new MyArraySpliterator(twoThousandNumbers);
     Stream<Long> stream = StreamSupport.stream(spliterator, false);
