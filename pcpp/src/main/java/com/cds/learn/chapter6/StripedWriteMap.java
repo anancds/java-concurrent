@@ -15,6 +15,7 @@ public class StripedWriteMap<K,V> implements OurMap<K,V> {
   private volatile ItemNode<K,V>[] buckets;
   private final int lockCount;
   private final Object[] locks;
+  //当read时，无法保证sizes的可见性吗？final是可以保证的
   private final AtomicIntegerArray sizes;
 
   public StripedWriteMap(int bucketCount, int lockCount) {
